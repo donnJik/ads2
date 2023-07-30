@@ -1,5 +1,10 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        LinkedList linkedList = new LinkedList();
+        linkedList.addNode(3);
+        linkedList.addNode(7);
+        linkedList.addNode(12);
+        linkedList.addNode(5);
+        linkedList.printList();
     }
 }
