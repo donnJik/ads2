@@ -8,5 +8,8 @@ public class Main {
         linkedList.addNode(5);
         linkedList.addNode(5);
         linkedList.printList();
+        System.out.println(linkedList.size());
+        System.out.println(linkedList.get(6));
+
     }
 }

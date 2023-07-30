@@ -5,7 +5,7 @@ public class MyLinkedList<E> implements MyList{
     MyLinkedList(int size) {
         this.head = null;
         this.tail=null;
-        this.size=0;
+        this.size=size;
     }
     public void addNode(int val) {
         ListNode newNode = new ListNode(val);
@@ -16,12 +16,12 @@ public class MyLinkedList<E> implements MyList{
         }
         else {
             ListNode currentNode= this.head;
+            int i=0;
             while(currentNode.next!= null){
                 currentNode=currentNode.next;
             }
             currentNode.next=newNode;
-        }
-        size++;
+        }size++;
 
     }
     // Print the linked list
@@ -36,7 +36,7 @@ public class MyLinkedList<E> implements MyList{
 
     @Override
     public int size() {
-        return size;
+        return this.size;
     }
 
     @Override
@@ -73,8 +73,15 @@ public class MyLinkedList<E> implements MyList{
 
     @Override
     public Object get(int index) {
-        return null;
+        if (index >= 0 && index < size) {
+            ListNode currentNode = this.head;
+            for (int i = 0; i < index; i++) {
+                currentNode = currentNode.next;
+            }
+            return currentNode.val;
+        } else throw new IndexOutOfBoundsException("Index is out of bounds");
     }
+
 
     @Override
     public int indexOf(Object o) {
