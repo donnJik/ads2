@@ -1,9 +1,12 @@
-public class MyLinkedList implements MyList{
+public class MyLinkedList<E> implements MyList{
     ListNode head;
-    MyLinkedList() {
+    ListNode tail;
+    int size;
+    MyLinkedList(int size) {
         this.head = null;
+        this.tail=null;
+        this.size=0;
     }
-    // Add a node to the end of the linked list
     public void addNode(int val) {
         ListNode newNode = new ListNode(val);
         if (this.head == null) {
@@ -28,7 +31,7 @@ public class MyLinkedList implements MyList{
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
@@ -40,6 +43,8 @@ public class MyLinkedList implements MyList{
     public void add(Object item) {
 
     }
+
+    
 
     @Override
     public void add(Object item, int index) {
