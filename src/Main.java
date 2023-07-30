@@ -5,6 +5,8 @@ public class Main {
         linkedList.addNode(7);
         linkedList.addNode(12);
         linkedList.addNode(5);
+        linkedList.addNode(5);
+        linkedList.addNode(5);
         linkedList.printList();
     }
 }

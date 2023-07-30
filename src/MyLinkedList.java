@@ -9,15 +9,20 @@ public class MyLinkedList<E> implements MyList{
     }
     public void addNode(int val) {
         ListNode newNode = new ListNode(val);
-        if (this.head == null) {
-            this.head = newNode;
+        if (this.head==null){
+            this.head=newNode;
+            this.tail=newNode;
             return;
         }
-        ListNode currentNode = this.head;
-        while (currentNode.next != null) {
-            currentNode = currentNode.next;
+        else {
+            ListNode currentNode= this.head;
+            while(currentNode.next!= null){
+                currentNode=currentNode.next;
+            }
+            currentNode.next=newNode;
         }
-        currentNode.next = newNode;
+        size++;
+
     }
     // Print the linked list
     public void printList() {
@@ -44,7 +49,7 @@ public class MyLinkedList<E> implements MyList{
 
     }
 
-    
+
 
     @Override
     public void add(Object item, int index) {
@@ -86,6 +91,3 @@ public class MyLinkedList<E> implements MyList{
 
     }
 }
-
-
-
