@@ -67,7 +67,8 @@ public class MyArrayList implements MyList{//created a class MyArrayList and imp
 
     @Override
     public Object get(int index) {
-        return null;
+        checkIndex(index);
+        return arr[index];
     }
 
     @Override
