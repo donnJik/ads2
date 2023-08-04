@@ -1,7 +1,7 @@
 public class MyLinkedList<E> implements MyList {
-    ListNode head;
-    ListNode tail;
-    int size;
+    ListNode head;//Ссылка на первый узел.
+    ListNode tail;//Ссылка на последний узел.
+    int size;//Количество элементов в списке.
 
     MyLinkedList(int size) {
         this.head = null;
@@ -10,15 +10,15 @@ public class MyLinkedList<E> implements MyList {
     }
 
     public void addNode(int val) {
-        ListNode newNode = new ListNode(val);
-        if (this.head == null) {
+        ListNode newNode = new ListNode(val);//Создается новый узел с указанным значением.
+        if (this.head == null) {//Если список пуст, узел будет ежинственным в списке.
             this.head = newNode;
             this.tail = newNode;
             return;
         } else {
-            ListNode currentNode = this.head;
+            ListNode currentNode = this.head;//Если же список не пуст, текущий узел будет равен первому узлу.
             int i = 0;
-            while (currentNode.next != null) {
+            while (currentNode.next != null) {//
                 currentNode = currentNode.next;
             }
             currentNode.next = newNode;
@@ -27,7 +27,7 @@ public class MyLinkedList<E> implements MyList {
 
     }
 
-    // Print the linked list
+
     public void printList() {
         ListNode currentNode = this.head;
         while (currentNode != null) {
@@ -116,12 +116,12 @@ public class MyLinkedList<E> implements MyList {
 
     @Override
     public Object get(int index) {
-        if (index >= 0 && index < size) {
-            ListNode currentNode = this.head;
-            for (int i = 0; i < index; i++) {
+        if (index >= 0 && index < size) {//Находится ли индекс допустимом диапазоне.
+            ListNode currentNode = this.head;//Создается новая перемнная равная начальному положению.
+            for (int i = 0; i < index; i++) {//Обход списка до указанного индекса.
                 currentNode = currentNode.next;
             }
-            return currentNode.val;
+            return currentNode.val;//Возвращает значение под индексом.
         } else throw new IndexOutOfBoundsException("Index is out of bounds");
     }
 
