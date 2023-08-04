@@ -1,12 +1,12 @@
 
 
-public class MyArrayList implements MyList{
-    private int[] arr;
-    private int size;
+public class MyArrayList implements MyList{//created a class MyArrayList and implemented List interface.
+    private int[] arr;//created var arr.
+    private int size; //created size var.
 
-    MyArrayList(){
-        this.arr = new int[5];
-        this.size = 0;
+    MyArrayList(){//конструктор для класс MyArrayList.
+        this.arr = new int[5];//Присваивается размер 5, массиву.
+        this.size = 0;//Изначальное количество элементов в массиве 0.
     }
     public void addElement(int element){
         if(size == arr.length) {
