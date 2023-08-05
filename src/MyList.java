@@ -1,13 +1,17 @@
-public interface MyList<T> {
+import java.util.Collection;
+public interface MyList<E> {
 
         int size();
         boolean contains(Object o);
-        void add(T item);
-        void add(T item, int index);
-        boolean remove(T item);
-        T remove(int index);
+        void add(E item);
+        void add(E item, int index);
+        boolean remove(E item);
+        E remove(int index);
         void clear();
-        T get(int index);
+
+        boolean addAll(int index, Collection<? extends E> c);
+
+        E get(int index);
         int indexOf(Object o);
         int lastIndexOf(Object o);
         void sort();

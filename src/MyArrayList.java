@@ -1,11 +1,12 @@
 
 
+import java.util.Collection;
 public class MyArrayList implements MyList{//created a class MyArrayList and implemented List interface.
-    private int[] arr;//created var arr.
+    private Object[] arr;//created var arr.
     private int size; //created size var.
 
     MyArrayList(){//Конструктор для класс MyArrayList.
-        this.arr = new int[5];//Присваивается размер 5, массиву.
+        this.arr = new Object[5];//Присваивается размер 5, массиву.
         this.size = 0;//Изначальное количество элементов в массиве 0.
     }
     public void addElement(int element){
@@ -15,13 +16,13 @@ public class MyArrayList implements MyList{//created a class MyArrayList and imp
         arr[size++] = element;//Если массив не полон, элемент записывется в массив.
     }
     private void increaseBuffer(){//Метод для увелечения массива.
-        int[] newArr = new int[arr.length * 2];//Создается новый массив с удвоенным размером.
+        Object[] newArr = new Object[arr.length * 2];//Создается новый массив с удвоенным размером.
         for(int i=0; i<arr.length; i++){
             newArr[i] = arr[i];//Элементы копируется со старого массива в новый.
         }
         arr = newArr;
     }
-    public int getElement(int index){//Метод для возвращения элемента массива под заданным индексом.
+    public Object getElement(int index){//Метод для возвращения элемента массива под заданным индексом.
         checkIndex(index);
         return arr[index];
     }
@@ -61,9 +62,49 @@ public class MyArrayList implements MyList{//created a class MyArrayList and imp
     }
 
     public void clear(){
-        this.arr = new int[5];
+        this.arr = new Object[5];
         this.size = 0;
     }
+
+    @Override
+    public boolean addAll(int index, Collection c) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Индекс выходит за пределы списка");
+        }
+
+        if (c == null || c.isEmpty()) {
+            return false;
+        }
+
+        int newSize = size + c.size();
+        if (newSize > arr.length) {
+            ensureCapacity(newSize);
+        }
+
+        // Сдвигаем элементы вправо, чтобы сделать место для добавляемой коллекции
+        System.arraycopy(arr, index, arr, index + c.size(), size - index);
+
+        // Вставляем элементы из коллекции по указанному индексу
+        int i = index;
+        for (Object element : c) {
+            arr[i++] = element;
+        }
+
+        size = newSize;
+        return true;
+    }
+
+    private void ensureCapacity(int capacity) {
+        int newCapacity = arr.length * 2;
+        while (newCapacity < capacity) {
+            newCapacity *= 2;
+        }
+
+        Object[] newArr = new Object[newCapacity];
+        System.arraycopy(arr, 0, newArr, 0, size);
+        arr = newArr;
+    }
+
 
     @Override
     public Object get(int index) {

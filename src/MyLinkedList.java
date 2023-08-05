@@ -1,4 +1,6 @@
-public class MyLinkedList<E> implements MyList {
+import java.util.Collection;
+
+public class MyLinkedList<E> implements MyList<E> {
     ListNode head;//Ссылка на первый узел.
     ListNode tail;//Ссылка на последний узел.
     int size;//Количество элементов в списке.
@@ -64,12 +66,12 @@ public class MyLinkedList<E> implements MyList {
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Индекс выходит за пределы списка");
         }
 
-        ListNode removedNode;
+        ListNode<E> removedNode;
         if (index == 0) {
             // Removing the head node
             removedNode = head;
@@ -111,18 +113,18 @@ public class MyLinkedList<E> implements MyList {
 
     @Override
     public void clear() {
-
     }
-
     @Override
-    public Object get(int index) {
-        if (index >= 0 && index < size) {//Находится ли индекс допустимом диапазоне.
-            ListNode currentNode = this.head;//Создается новая перемнная равная начальному положению.
-            for (int i = 0; i < index; i++) {//Обход списка до указанного индекса.
+    public E get(int index) {
+        if (index >= 0 && index < size) {
+            ListNode<E> currentNode = this.head;
+            for (int i = 0; i < index; i++) {
                 currentNode = currentNode.next;
             }
-            return currentNode.val;//Возвращает значение под индексом.
-        } else throw new IndexOutOfBoundsException("Index is out of bounds");
+            return currentNode.val;
+        } else {
+            throw new IndexOutOfBoundsException("Index is out of bounds");
+        }
     }
 
 
@@ -138,6 +140,58 @@ public class MyLinkedList<E> implements MyList {
 
     @Override
     public void sort() {
+    }
 
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Индекс выходит за пределы списка");
+        }
+
+        if (c == null || c.isEmpty()) {
+            return false;
+        }
+
+        int newSize = size + c.size();
+
+        if (index == size) {
+            ListNode<E> currentNode = tail;
+
+            for (E element : c) {
+                ListNode<E> newNode = new ListNode<>(element);
+                currentNode.next = newNode;
+                newNode.prev = currentNode;
+                tail = newNode;
+                currentNode = newNode;
+                size++;
+            }
+        } else {
+            ListNode<E> currentNode;
+            if (index <= size / 2) {
+                currentNode = head;
+                for (int i = 0; i < index; i++) {
+                    currentNode = currentNode.next;
+                }
+            } else {
+                currentNode = tail;
+                for (int i = size - 1; i > index; i--) {
+                    currentNode = currentNode.prev;
+                }
+            }
+
+            for (E element : c) {
+                ListNode<E> newNode = new ListNode<>(element);
+                newNode.next = currentNode.next;
+                if (currentNode.next != null) {
+                    currentNode.next.prev = newNode;
+                }
+                currentNode.next = newNode;
+                newNode.prev = currentNode;
+                currentNode = newNode;
+                size++;
+            }
+        }
+
+        return true;
     }
 }
